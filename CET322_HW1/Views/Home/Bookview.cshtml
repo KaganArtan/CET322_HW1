@@ -1,0 +1,63 @@
+﻿@{
+    var books = new List<CET322_HW1.Models.BookManager.Book>
+    {
+        new CET322_HW1.Models.BookManager.Book { BookName = "Denemeler", Author = "Montaigne", PageNumber = 336, DueDate = DateTime.Now },
+        new CET322_HW1.Models.BookManager.Book { BookName = "Suç ve Ceza", Author = "Dostoyevski", PageNumber = 551, DueDate = DateTime.Now.AddDays(-14) },
+        new CET322_HW1.Models.BookManager.Book { BookName = "1984", Author = "George Orwell", PageNumber = 328, DueDate = DateTime.Now.AddDays(21) }
+    };
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kitaplar</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+
+        .green {
+            background-color: green;
+        }
+
+        .red {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>Kitaplar</h2>
+    <table>
+        <tr>
+            <th>Kitap Adı</th>
+            <th>Yazar</th>
+            <th>Sayfa Sayısı</th>
+            <th>Ödünç Alınma Tarihi</th>
+        </tr>
+        @foreach (var book in books)
+        {
+            <tr>
+                <td>@book.BookName</td>
+                <td>@book.Author</td>
+                <td>@book.PageNumber</td>
+                <td class="@(book.DueDate.Date == DateTime.Today ? "yellow" : (book.DueDate.Date > DateTime.Today ? "green" : "red"))">@book.DueDate.ToShortDateString()</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>
